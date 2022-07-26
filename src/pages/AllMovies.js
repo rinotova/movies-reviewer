@@ -1,5 +1,7 @@
+import InputSearch from '../components/InputSearch';
+
 const AllMovies = () => {
-  return <h1>All movies</h1>;
+  return <InputSearch />;
 };
 
 export default AllMovies;
