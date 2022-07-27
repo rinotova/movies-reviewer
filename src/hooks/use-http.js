@@ -38,7 +38,11 @@ function useHttp(requestFunction, startWithPending = false) {
   });
 
   const sendRequest = useCallback(
-    async function (requestData, q) {
+    async function (
+      requestData,
+      q,
+      postProcessCallback = (responseJson) => responseJson
+    ) {
       dispatch({ type: 'SEND' });
       try {
         // Abort previous ongoing request and set a new abort controller
@@ -54,7 +58,9 @@ function useHttp(requestFunction, startWithPending = false) {
           q
         );
         dispatch({ type: 'SUCCESS', responseData });
+        postProcessCallback(responseData);
       } catch (error) {
+        console.log(error);
         dispatch({
           type: 'ERROR',
           errorMessage: error.message || 'Something went wrong!',

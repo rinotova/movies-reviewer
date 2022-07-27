@@ -20,6 +20,17 @@ body {
   align-items: center;
 }
 
+.imgPlaceholder{ 
+  background-color: #eee;
+  display: flex;
+  height: 100px;
+  margin: 0.5rem;
+  width: 66px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 
 .navLinkActive {
 

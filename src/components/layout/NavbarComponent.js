@@ -4,7 +4,7 @@ import reviewer from '../../img/reviewer.png';
 
 const NavbarComponent = () => {
   return (
-    <header className="min-w-full border-b-4 border-solid border-gray-500 mb-8 pt-2">
+    <header className="min-w-full border-b-4 border-solid border-gray-500 mb-6 pt-2">
       <Navbar fluid={true} rounded={false}>
         <NavLink to="/movies">
           <div className="flex items-center">
