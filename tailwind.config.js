@@ -6,7 +6,11 @@ module.exports = {
     './src/**/*.{js,jsx,ts,tsx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        teko: ['Teko', 'sans-serif'],
+      },
+    },
   },
   plugins: [require('flowbite/plugin')],
 };
