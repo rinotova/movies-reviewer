@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialSearchSuggestionsState = {
   searchSuggestions: [],
   searchTerm: '',
+  totalResults: 0,
   showSuggestions: true,
 };
 
@@ -11,13 +12,15 @@ const searchSuggestions = createSlice({
   initialState: initialSearchSuggestionsState,
   reducers: {
     addSuggestions(state, action) {
-      state.searchSuggestions = action.payload;
+      const { mappedSuggestions, totalResults, q } = action.payload;
+      state.searchSuggestions = mappedSuggestions;
+      state.searchTerm = q;
+      state.totalResults = totalResults;
     },
     removeSuggestions(state) {
       state.searchSuggestions = [];
-    },
-    updateSearchTerm(state, action) {
-      state.searchTerm = action.payload;
+      state.searchTerm = '';
+      state.totalResults = 0;
     },
     showSuggestions(state) {
       state.showSuggestions = true;

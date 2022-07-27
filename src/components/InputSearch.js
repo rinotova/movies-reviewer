@@ -17,8 +17,8 @@ const InputSearch = () => {
   const { sendRequest } = useHttp(getMovieSearchSuggestions);
 
   const searchSuggestionsCalbback = useCallback(
-    (mappedSuggestions) => {
-      dispatch(searchSuggestionsActions.addSuggestions(mappedSuggestions));
+    (suggestionsData) => {
+      dispatch(searchSuggestionsActions.addSuggestions(suggestionsData));
     },
     [dispatch]
   );

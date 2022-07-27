@@ -8,6 +8,7 @@ import Layout from './components/layout/Layout';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { searchSuggestionsActions } from './store/slices/search-suggestions-slice';
+import AllSearchResults from './pages/AllSearchResults';
 
 function App() {
   const dispatch = useDispatch();
@@ -20,19 +21,22 @@ function App() {
   return (
     <Layout>
       <Switch>
-        <Route path='/' exact>
-          <Redirect to='/movies' />
+        <Route path="/" exact>
+          <Redirect to="/movies" />
         </Route>
-        <Route path='/movies' exact>
+        <Route path="/movies" exact>
           <AllMovies />
         </Route>
-        <Route path='/movies/:movieId'>
+        <Route path="/all-movie-results/:q" exact>
+          <AllSearchResults />
+        </Route>
+        <Route path="/movies/:movieId">
           <MovieDetail />
         </Route>
-        <Route path='/new-movie-review'>
+        <Route path="/new-movie-review">
           <NewMovieReview />
         </Route>
-        <Route path='*'>
+        <Route path="*">
           <NotFound />
         </Route>
       </Switch>

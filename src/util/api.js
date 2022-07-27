@@ -1,6 +1,38 @@
 const FIREBASE_DOMAIN = 'https://react-prep-default-rtdb.firebaseio.com';
 const OMDB_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}`;
 
+export async function getAllMoviesForQuery(q, requestData, numOfPages) {
+  const fetchArray = [];
+
+  for (let index = 1; index <= numOfPages; index++) {
+    fetchArray.push(
+      fetch(`${OMDB_URL}&s=${q}&page=${index}`, { ...requestData }).then(
+        (response) => response.json()
+      )
+    );
+  }
+  let jsonResponses = await Promise.all(fetchArray);
+  const mappedResponses = jsonResponses.map((jsonResponse) => {
+    return jsonResponse.Search;
+  });
+
+  const mergedResults = [].concat.apply([], mappedResponses);
+
+  let mappedSuggestions = [];
+  if (mergedResults.length > 0) {
+    mappedSuggestions = mergedResults.map((searchResult) => {
+      return {
+        id: searchResult.imdbID,
+        title: searchResult.Title,
+        poster: searchResult.Poster,
+        year: searchResult.Year,
+      };
+    });
+  }
+
+  return mappedSuggestions;
+}
+
 export async function getMovieSearchSuggestions(q, requestData) {
   const response = await fetch(`${OMDB_URL}&s=${q}`, { ...requestData });
   const data = await response.json();
@@ -18,7 +50,7 @@ export async function getMovieSearchSuggestions(q, requestData) {
     });
   }
 
-  return mappedSuggestions;
+  return { mappedSuggestions, totalResults, q };
 }
 
 export async function getAllQuotes(requestData) {

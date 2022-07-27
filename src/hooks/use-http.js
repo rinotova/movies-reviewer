@@ -41,7 +41,8 @@ function useHttp(requestFunction, startWithPending = false) {
     async function (
       q,
       requestData,
-      postProcessCallback = (responseJson) => responseJson
+      postProcessCallback = (responseJson) => responseJson,
+      numOfPages
     ) {
       dispatch({ type: 'SEND' });
       try {
@@ -53,10 +54,14 @@ function useHttp(requestFunction, startWithPending = false) {
         dispatch(useFetchControllerActions.setController(newController));
 
         // Send request
-        const responseData = await requestFunction(q, {
-          ...requestData,
-          signal,
-        });
+        const responseData = await requestFunction(
+          q,
+          {
+            ...requestData,
+            signal,
+          },
+          numOfPages
+        );
         dispatch({ type: 'SUCCESS', responseData });
         postProcessCallback(responseData);
       } catch (error) {
