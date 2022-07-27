@@ -54,7 +54,7 @@ export async function getMovieSearchSuggestions(q, requestData) {
   return { mappedSuggestions, totalResults, q };
 }
 
-export async function getAllQuotes(requestData) {
+export async function getAllMoviesWithReviews(requestData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
     ...requestData,
   });
@@ -89,40 +89,16 @@ export async function getMovie(movieId) {
   return movie;
 }
 
-export async function getSingleQuote(quoteId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${quoteId}.json`);
-  const data = await response.json();
-
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not fetch quote.');
-  }
-
-  const loadedQuote = {
-    id: quoteId,
-    ...data,
-  };
-
-  return loadedQuote;
-}
-
-export async function addQuote(quoteData) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
-    method: 'POST',
-    body: JSON.stringify(quoteData),
+export async function addComment(requestData) {
+  // Save movie
+  await fetch(`${FIREBASE_DOMAIN}/movies/${requestData.movieId}.json`, {
+    method: 'PUT',
+    body: JSON.stringify({ ...requestData.loadedMovie, modified: Date.now() }),
     headers: {
       'Content-Type': 'application/json',
     },
   });
-  const data = await response.json();
 
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not create quote.');
-  }
-
-  return null;
-}
-
-export async function addComment(requestData) {
   // Save comment
   const response = await fetch(
     `${FIREBASE_DOMAIN}/comments/${requestData.movieId}.json`,
@@ -134,15 +110,6 @@ export async function addComment(requestData) {
       },
     }
   );
-
-  // Save movie
-  await fetch(`${FIREBASE_DOMAIN}/${requestData.movieId}.json`, {
-    method: 'POST',
-    body: JSON.stringify({ ...requestData.loadedMovie, modified: Date.now() }),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  });
 
   const data = await response.json();
 
