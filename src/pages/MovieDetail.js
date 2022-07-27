@@ -1,8 +1,10 @@
-import { useEffect } from 'react';
+import { Fragment, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import useHttp from '../hooks/use-http';
 import { getMovie } from '../util/api';
 import LoadingSpinner from '../UI/LoadingSpinner';
+import MovieTile from '../components/MovieTile';
+import Reviews from '../components/reviews/Reviews';
 
 const MovieDetail = () => {
   const params = useParams();
@@ -34,7 +36,12 @@ const MovieDetail = () => {
     return <p>No movie found!</p>;
   }
 
-  return 'Hi';
+  return (
+    <Fragment>
+      <MovieTile loadedMovie={loadedMovie} />
+      <Reviews loadedMovie={loadedMovie} />
+    </Fragment>
+  );
 };
 
 export default MovieDetail;

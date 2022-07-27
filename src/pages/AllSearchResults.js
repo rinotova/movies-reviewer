@@ -20,7 +20,6 @@ const AllSearchResults = () => {
   } = useHttp(getAllMoviesForQuery, true);
 
   useEffect(() => {
-    console.log('Loggin effect');
     sendRequest(q, {}, () => {}, numOfPages);
   }, [sendRequest, q, numOfPages]);
 

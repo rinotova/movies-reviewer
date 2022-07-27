@@ -37,8 +37,8 @@ const SearchSuggestionItem = (props) => {
           </div>
         )}
         <div className="flex flex-col font-teko text-xl md:text-4xl">
-          <p className="">{searchSuggestion.title}</p>
-          <p className="">{searchSuggestion.year}</p>
+          <p>{searchSuggestion.title}</p>
+          <p>{searchSuggestion.year}</p>
         </div>
       </div>
     </button>

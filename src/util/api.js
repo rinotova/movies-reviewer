@@ -1,4 +1,5 @@
-const FIREBASE_DOMAIN = 'https://react-prep-default-rtdb.firebaseio.com';
+const FIREBASE_DOMAIN =
+  'https://react-movies-reviewer-default-rtdb.europe-west1.firebasedatabase.app';
 const OMDB_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}`;
 
 export async function getAllMoviesForQuery(q, requestData, numOfPages) {
@@ -122,8 +123,9 @@ export async function addQuote(quoteData) {
 }
 
 export async function addComment(requestData) {
+  // Save comment
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/comments/${requestData.quoteId}.json`,
+    `${FIREBASE_DOMAIN}/comments/${requestData.movieId}.json`,
     {
       method: 'POST',
       body: JSON.stringify(requestData.commentData),
@@ -132,6 +134,16 @@ export async function addComment(requestData) {
       },
     }
   );
+
+  // Save movie
+  await fetch(`${FIREBASE_DOMAIN}/${requestData.movieId}.json`, {
+    method: 'POST',
+    body: JSON.stringify({ ...requestData.loadedMovie, modified: Date.now() }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
   const data = await response.json();
 
   if (!response.ok) {
@@ -141,8 +153,8 @@ export async function addComment(requestData) {
   return { commentId: data.name };
 }
 
-export async function getAllComments(quoteId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${quoteId}.json`);
+export async function getAllComments(movieId) {
+  const response = await fetch(`${FIREBASE_DOMAIN}/comments/${movieId}.json`);
 
   const data = await response.json();
 
