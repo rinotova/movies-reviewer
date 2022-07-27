@@ -54,6 +54,26 @@ export async function getMovieSearchSuggestions(q, requestData) {
   return { mappedSuggestions, totalResults, q };
 }
 
+export async function gettAllReviewsData(q, requestData) {
+  const responseMovies = await fetch(`${FIREBASE_DOMAIN}/movies.json`, {
+    ...requestData,
+  });
+  const responseComments = await fetch(`${FIREBASE_DOMAIN}/comments.json`, {
+    ...requestData,
+  });
+  const moviesData = await responseMovies.json();
+  const commentsData = await responseComments.json();
+
+  const movies = Object.keys(moviesData).map((movieId) => {
+    return {
+      ...moviesData[movieId],
+      numberOfComments: Object.keys(commentsData[movieId]).length,
+    };
+  });
+
+  return movies;
+}
+
 export async function getAllMoviesWithReviews(requestData) {
   const response = await fetch(`${FIREBASE_DOMAIN}/quotes.json`, {
     ...requestData,

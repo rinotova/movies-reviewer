@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom';
 import reviewer from '../img/reviewer.png';
 
-const MovieTile = ({ loadedMovie }) => {
+const MovieTile = ({ loadedMovie, numberOfComments }) => {
   const badges = loadedMovie.Genre.split(',').map((genre, index) => {
     return (
       <span
@@ -81,6 +82,14 @@ const MovieTile = ({ loadedMovie }) => {
           {ratings}
         </div>
       </div>
+      {numberOfComments > 0 && (
+        <Link to={`/movies/${loadedMovie.imdbID}`}>
+          <p className="font-teko text-white text-xl mt-4 mb-14 border-b border-solid border-gray-500 pb-4">
+            See ({numberOfComments}){' '}
+            {numberOfComments === 1 ? 'comment' : 'comments'}
+          </p>
+        </Link>
+      )}
     </section>
   );
 };
