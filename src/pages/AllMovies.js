@@ -1,14 +1,5 @@
-import { Fragment } from 'react';
-import InputSearch from '../components/InputSearch';
-import SearchSuggestions from '../components/SearchSuggestions/SearchSuggestions';
-
 const AllMovies = () => {
-  return (
-    <Fragment>
-      <InputSearch />
-      <SearchSuggestions />
-    </Fragment>
-  );
+  return 'Movie list';
 };
 
 export default AllMovies;

@@ -1,13 +1,12 @@
-import { useDispatch } from 'react-redux';
-import { selectedMovieActions } from '../../store/slices/selected-movie-slice';
 import reviewer from '../../img/reviewer.png';
+import { useHistory } from 'react-router-dom';
 
 const SearchSuggestionItem = (props) => {
-  const dispatch = useDispatch();
+  const history = useHistory();
   const { searchSuggestion } = props;
 
   const searchSuggestionClickHandler = () => {
-    dispatch(selectedMovieActions.updateSelectedMovie(searchSuggestion));
+    history.push(`/movies/${searchSuggestion.id}`);
   };
 
   return (

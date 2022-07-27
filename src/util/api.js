@@ -1,11 +1,10 @@
 const FIREBASE_DOMAIN = 'https://react-prep-default-rtdb.firebaseio.com';
 const OMDB_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}`;
 
-export async function getMovieSearchSuggestions(requestData, q) {
+export async function getMovieSearchSuggestions(q, requestData) {
   const response = await fetch(`${OMDB_URL}&s=${q}`, { ...requestData });
   const data = await response.json();
   const { totalResults, Search } = data;
-  console.log(data);
 
   let mappedSuggestions = [];
   if (totalResults > 0) {
@@ -44,6 +43,17 @@ export async function getAllQuotes(requestData) {
   }
 
   return transformedQuotes;
+}
+
+export async function getMovie(movieId) {
+  const response = await fetch(`${OMDB_URL}&i=${movieId}`);
+  const movie = await response.json();
+
+  if (!response.ok) {
+    throw new Error(movie.message || 'Could not fetch quote.');
+  }
+
+  return movie;
 }
 
 export async function getSingleQuote(quoteId) {

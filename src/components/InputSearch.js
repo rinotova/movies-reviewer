@@ -32,14 +32,13 @@ const InputSearch = () => {
       if (searchTerm.length < 3) {
         dispatch(searchSuggestionsActions.removeSuggestions());
       } else {
-        sendRequest({}, searchTerm, searchSuggestionsCalbback);
+        sendRequest(searchTerm, {}, searchSuggestionsCalbback);
       }
     },
     [dispatch, sendRequest, searchSuggestionsCalbback]
   );
 
   useEffect(() => {
-    console.log('SUBSCRIBING');
     const inputSearch$ = fromEvent(inputSearchRef.current, 'input');
     inputSearch$
       .pipe(
