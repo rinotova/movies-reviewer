@@ -10,10 +10,11 @@
   height: 64px;
   margin: 8px;
   border-radius: 50%;
-  border: 6px solid teal;
-  border-color: teal transparent teal transparent;
+  border: 6px solid rgb(217, 119, 6);
+  border-color: rgb(217, 119, 6) transparent rgb(217, 119, 6) transparent;
   animation: spinner 1.2s linear infinite;
 }
+
 @keyframes spinner {
   0% {
     transform: rotate(0deg);

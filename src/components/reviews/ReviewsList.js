@@ -5,7 +5,7 @@ const ReviewsList = (props) => {
     <section>
       <ul className="">
         {props.comments.map((comment) => (
-          <ReviewItem key={comment.id} text={comment.text} />
+          <ReviewItem key={comment.id} comment={comment} />
         ))}
       </ul>
     </section>

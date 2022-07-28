@@ -1,6 +1,7 @@
 import NavbarComponent from './NavbarComponent';
 import InputSearch from '../InputSearch';
 import SearchSuggestions from '../SearchSuggestions/SearchSuggestions';
+import Footer from './Footer';
 
 const Layout = (props) => {
   return (
@@ -11,6 +12,7 @@ const Layout = (props) => {
         <SearchSuggestions />
         {props.children}
       </main>
+      <Footer />
     </div>
   );
 };

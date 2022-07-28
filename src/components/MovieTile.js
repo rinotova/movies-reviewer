@@ -84,7 +84,7 @@ const MovieTile = ({ loadedMovie, numberOfComments }) => {
       </div>
       {numberOfComments > 0 && (
         <Link to={`/movies/${loadedMovie.imdbID}`}>
-          <p className="font-teko text-white text-xl mt-4 mb-14 border-b border-solid border-gray-500 pb-4">
+          <p className="font-teko text-white underline underline-offset-4 text-xl mt-4 mb-14 border-b border-solid border-gray-500 pb-4">
             See ({numberOfComments}){' '}
             {numberOfComments === 1 ? 'comment' : 'comments'}
           </p>
