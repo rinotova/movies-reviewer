@@ -1,6 +1,6 @@
 const FIREBASE_DOMAIN =
   'https://react-movies-reviewer-default-rtdb.europe-west1.firebasedatabase.app';
-const OMDB_URL = `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}`;
+const OMDB_URL = `https://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_API}`;
 
 export async function getAllMoviesForQuery(q, requestData, numOfPages) {
   const fetchArray = [];
