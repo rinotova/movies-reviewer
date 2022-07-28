@@ -24,6 +24,7 @@ const Reviews = (props) => {
 
   const addedCommentHandler = useCallback(() => {
     sendRequest(movieId);
+    setIsAddingComment(false);
   }, [sendRequest, movieId]);
 
   let comments;
