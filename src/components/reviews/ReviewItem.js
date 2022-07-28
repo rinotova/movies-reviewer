@@ -6,6 +6,7 @@ const ReviewItem = ({ comment }) => {
       <div className="flex flex-col">
         <div className="flex">
           <img
+            className="!w-[28px] !h-[28px]"
             src={reviewer}
             alt="Reviewer"
             width="28"

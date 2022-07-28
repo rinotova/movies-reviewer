@@ -11,7 +11,7 @@ const Footer = () => {
           rel="noreferrer"
         >
           <img
-            className="ml-6"
+            className="ml-6 className='!w-[32px] !h-[32px]'"
             src={githubLogo}
             alt="GitHub Logo"
             width="32"
