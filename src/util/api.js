@@ -64,12 +64,22 @@ export async function gettAllReviewsData(q, requestData) {
   const moviesData = await responseMovies.json();
   const commentsData = await responseComments.json();
 
+  if (!moviesData) {
+    return [];
+  }
+
   const movies = Object.keys(moviesData).map((movieId) => {
     return {
       ...moviesData[movieId],
       numberOfComments: Object.keys(commentsData[movieId]).length,
     };
   });
+
+  movies
+    .sort(function (x, y) {
+      return x.modified - y.modified;
+    })
+    .reverse();
 
   return movies;
 }
