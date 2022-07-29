@@ -1,12 +1,12 @@
 import reviewer from '../../img/reviewer.png';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SearchSuggestionItem = (props) => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { searchSuggestion } = props;
 
   const searchSuggestionClickHandler = () => {
-    history.push(`/movies/${searchSuggestion.id}`);
+    navigate(`/movies/${searchSuggestion.id}`);
   };
 
   return (

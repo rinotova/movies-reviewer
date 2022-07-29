@@ -23,7 +23,7 @@ const NavbarComponent = () => {
         <Navbar.Toggle />
         <Navbar.Collapse>
           <li>
-            <NavLink to="/movies" activeClassName="navLinkActive">
+            <NavLink to="/movies">
               <span className="font-teko text-xl md:text-2xl dark:text-white dark:hover:text-amber-600">
                 All Movies
               </span>

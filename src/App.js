@@ -1,4 +1,4 @@
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Navigate, Routes } from 'react-router-dom';
 
 import AllMovies from './pages/AllMovies';
 import MovieDetail from './pages/MovieDetail';
@@ -20,26 +20,14 @@ function App() {
 
   return (
     <Layout>
-      <Switch>
-        <Route path="/" exact>
-          <Redirect to="/movies" />
-        </Route>
-        <Route path="/movies" exact>
-          <AllMovies />
-        </Route>
-        <Route path="/all-movie-results/:q" exact>
-          <AllSearchResults />
-        </Route>
-        <Route path="/movies/:movieId">
-          <MovieDetail />
-        </Route>
-        <Route path="/new-movie-review">
-          <NewMovieReview />
-        </Route>
-        <Route path="*">
-          <NotFound />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Navigate replace to="/movies" />} />
+        <Route path="/movies" element={<AllMovies />} />
+        <Route path="/all-movie-results/:q" element={<AllSearchResults />} />
+        <Route path="/movies/:movieId" element={<MovieDetail />} />
+        <Route path="/new-movie-review" element={<NewMovieReview />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
     </Layout>
   );
 }

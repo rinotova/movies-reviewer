@@ -30,7 +30,7 @@ const AllMovies = () => {
 
   if (loadedMovies.length === 0) {
     return (
-      <p className="text-white text-4xl font-teko">
+      <p className="text-white text-4xl font-teko mt-8">
         No movies with reviews found!
       </p>
     );
